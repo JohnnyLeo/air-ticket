@@ -9,10 +9,12 @@ import org.apache.spark.sql.SparkSession
 object Recommend {
   def main(args: Array[String]): Unit = {
 
-    val spark = SparkSession.builder().
-      master("local").
-      appName("recommend").
-      getOrCreate()
+    System.getProperties.setProperty("HADOOP_USER_NAME", "suncaper")
+
+    val spark = SparkSession.builder()
+      .master("local")
+      .appName("recommend")
+      .getOrCreate()
     val rdd = spark.sparkContext.textFile("spark/train.txt")
 
     val df = spark.createDataFrame(rdd.map(x => {
@@ -28,6 +30,8 @@ object Recommend {
     val lr2 = lr1.setFeaturesCol("features").setLabelCol("order").setFitIntercept(true)
     val lr = lr2.setMaxIter(10).setRegParam(0.3).setElasticNetParam(0.8)
     val lrModel = lr.fit(vecDF)
+
+    lrModel.save("hdfs://192.168.101.122:9000/spark/model")
 
     val test = spark.sparkContext.textFile("spark/test.txt")
     val testDF = spark.createDataFrame(test.map(x => {
