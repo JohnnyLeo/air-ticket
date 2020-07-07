@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="layui/layui.js"></script>
+    <script src="js/jquery-1.11.0.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/ajaxUtil.js"></script>
+    <script src="echarts/echarts.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+    <title></title>
+</head>
+
+
+<body>
+
+
+
+
+<div class="layui-row">
+    <div class="layui-col-md2">
+        <div class="grid-demo grid-demo-bg1">
+            <!--            <ul class="layui-nav layui-nav-tree" lay-filter="test">-->
+            <div>
+                <!--                <p style="float: left">超好看的网站</p>-->
+                侧边导: <ul class="layui-nav layui-nav-tree layui-nav-side">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">我是主页</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">我是分支</a></dd>
+                        <dd><a href="javascript:;">我也是分支</a></dd>
+                        <dd><a href="">我还是分支</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">地图模式</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">移动模块</a></dd>
+                        <dd><a href="">后台模版</a></dd>
+                        <dd><a href="">电商平台</a></dd>
+                    </dl>
+                </li>
+                <!--            <li class="layui-nav-item"><a href="">产品</a></li>-->
+                <li class="layui-nav-item"><a href="">关于我们</a></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md10" >
+        <div class="grid-demo" >
+
+            <!--上方框-->
+            <div class="layui-card " id="elem" style="padding: 10px; background-color: #393D49; border-radius: 10px;">
+
+                <!--<div class="layui-card-body layui-bg-cyan " style="border-radius: 10px;" >-->
+
+                <div class="layui-row layui-col-space15" >
+                    <div class="layui-col-md1  ">
+                        <div class="grid-demo grid-demo-bg1 layui-col-lg-offset4  ">
+                            <i class="layui-icon layui-icon-time" style="font-size: 30px; color: #F0F0F0;"></i>
+                        </div>
+                    </div>
+                    <div class="layui-col-md11 ">
+                        <div class="grid-demo">
+
+
+                            <div class="layui-row">
+                                <div class="layui-col-md4">
+                                    <div class="grid-demo grid-demo-bg1">
+
+
+                                        <form class="layui-form" action="">
+                                            <div class="layui-inline">
+                                                <div class="layui-input-inline" style="width: 40%;">
+                                                    <select name="way" lay-verify="required" lay-search="">
+                                                        <option value="">往返</option>
+                                                        <option value="1">layer</option>
+                                                        <option value="2">form</option>
+                                                        <option value="3">layim</option>
+
+                                                    </select>
+                                                </div>
+                                                <div class="layui-input-inline" style="width: 40%;">
+                                                    <select name="kind" lay-verify="required" lay-search="">
+                                                        <option value="">1成人经济舱</option>
+                                                        <option value="1">layer</option>
+                                                        <option value="2">form</option>
+                                                        <option value="3">layim</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </form>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="layui-col-md4">
+                                    <div class="grid-demo">
+                                        <form class="layui-form" action="">
+                                            <div class="layui-inline">
+                                                <div id="search" class="layui-input-inline" style="width: 40%;">
+                                                    <select name="goto" lay-verify="required" lay-search="">
+                                                        <option value="">出发地</option>
+                                                        <option value="1">123</option>
+                                                        <option value="2">form</option>
+                                                        <option value="3">layim</option>
+
+                                                    </select>
+                                                </div>
+                                                <button type="button" class="layui-btn layui-btn-sm">交换</button>
+                                                <div id="search" class="layui-input-inline" style="width: 40%;">
+                                                    <select name="aim" lay-verify="required" lay-search="">
+                                                        <option value="">目的地</option>
+                                                        <option value="1">layer</option>
+                                                        <option value="2">form</option>
+                                                        <option value="3">layim</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </form>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="layui-col-md4">
+                                    <div class="grid-demo grid-demo-bg1">
+
+                                        <div class="layui-inline">
+
+                                            <div class="layui-input-inline">
+                                                <input type="text" class="layui-input" id="test3" placeholder="yyyy-MM">
+                                            </div>
+                                            <button type="button" class="layui-btn"><i class="layui-icon layui-icon-search" ></i>搜索</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!--</div>-->
+
+            </div>
+            <!--最低机票未来几月-->
+            <div id="lowestM" style="width: 900px;height: 500px">
+
+        </div>
+            <div id="goOffMDay" style="width: 900px;height: 400px">
+
+            </div>
+            <div id="returnMDay" style="width: 900px;height: 400px">
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+<style type="text/css">
+    body{
+        background-image: url("pic/cloud.png");
+    }
+    .card{
+        width: 60%;
+        margin-left: 20%;
+    }
+    .mid{
+        margin: auto;
+    }
+</style>
+<script>
+    var v1 = new Vue({
+        el:'#elem',
+        data: {
+            cards: []
+        },
+        // mounted() {
+        //     this.getInfo();
+        // },
+        methods:{
+            getInfo(){
+                ajax({
+                    method: HTTP_METHOD.GET,
+                    url: "",
+                    async: true,
+                    type: HTTP_RESPONSE_TYPE.JSON,
+                    callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+
+                        this.items = datas;
+                    }
+                })
+            }
+        }
+
+    });
+
+
+    //注意进度条依赖 element 模块，否则无法进行正常渲染和功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //年月选择器
+        laydate.render({
+            elem: '#test3'
+            ,type: 'month'
+        });
+
+    });
+    layui.use(['form', 'layedit'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit;
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+    });
+
+    //低价月表
+    var lowM = '7月';
+    var lowMChart = echarts.init(document.getElementById('lowestM'));
+    option1 = {
+        title: {
+            text: '未来几周最低票价预测',
+            subtext: '纯属虚构'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: [ '最低票价月份']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                // dataZoom: {
+                //     yAxisIndex: 'none'
+                // },
+                // dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['7月', '8月', '9月', '10月', '11月', '12月']
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '¥{value} '
+            }
+        },
+        series: [
+
+            {
+                name: '最低票价月份',
+                type: 'line',
+                data: [4572, 3546, 5234, 4561, 3124, 2145],
+                markPoint: {
+                    data: [
+                        {name: '月最低', value: 2145, xAxis: 5, yAxis: 2145}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'},
+                        [{
+                            symbol: 'none',
+                            x: '90%',
+                            yAxis: 'max'
+                        }, {
+                            symbol: 'circle',
+                            label: {
+                                position: 'start',
+                                formatter: '最大值'
+                            },
+                            type: 'max',
+                            name: '最高点'
+                        }]
+                    ]
+                }
+            }
+        ]
+    };
+    lowMChart.setOption(option1);
+    //拿到点击的最低月份
+    lowMChart.on('click',function (param) {
+        lowM = param.name;
+
+    })
+
+
+
+    //启程月
+    var goOffMChart = echarts.init(document.getElementById('goOffMDay'));
+    option2 = {
+
+        title: {
+            text: lowM+'去程票价预测',
+            subtext: '纯属虚构'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: [ '最低票价日期']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                // dataZoom: {
+                //     yAxisIndex: 'none'
+                // },
+                // dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+
+            type: 'category',
+            boundaryGap: false,
+            data: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'],
+            axisLine:{
+                lineStyle:{
+                    color:'#f0f0f0'
+                }
+            }
+        },
+        yAxis: {
+
+            type: 'value',
+            axisLabel: {
+                formatter: '¥{value} '
+            },
+            axisLine:{
+                lineStyle:{
+                    color:'#f0f0f0'
+                }
+            }
+        },
+        series: [
+
+            {
+
+                name: '预测票价',
+                type: 'line',
+                data: [4572, 3546, 5234, 4561, 3124, 2145, 3623, 5884, 4001, 3644],
+                markPoint: {
+                    data: [
+                        {name: '最低价', value: 2145, xAxis: 5, yAxis: 2145}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'},
+                        [{
+                            symbol: 'none',
+                            x: '90%',
+                            yAxis: 'max'
+                        }, {
+                            symbol: 'circle',
+                            label: {
+                                position: 'start',
+                                formatter: '最大值'
+                            },
+                            type: 'max',
+                            name: '最高点'
+                        }]
+                    ]
+                }
+            }
+        ]
+    };
+    goOffMChart.setOption(option2);
+    //返程月
+    var returnMChart = echarts.init(document.getElementById('returnMDay'));
+    option3 = {
+        title: {
+            text: lowM+'返程票价预测',
+            subtext: '纯属虚构'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: [ '最低票价日期']
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                // dataZoom: {
+                //     yAxisIndex: 'none'
+                // },
+                // dataView: {readOnly: false},
+                magicType: {type: ['line', 'bar']},
+                restore: {},
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'],
+            axisLine:{
+                lineStyle:{
+                    color:'#f0f0f0'
+                }
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                formatter: '¥{value} '
+            },
+            axisLine:{
+                lineStyle:{
+                    color:'#f0f0f0'
+                }
+            }
+        },
+        series: [
+
+            {
+                name: '预测票价',
+                type: 'line',
+                data: [4572, 3546, 5234, 4561, 3124, 2145, 3623, 5884, 4001, 3644],
+                markPoint: {
+                    data: [
+                        {name: '最低价', value: 2145, xAxis: 5, yAxis: 2145}
+                    ]
+                },
+                markLine: {
+                    data: [
+                        {type: 'average', name: '平均值'},
+                        [{
+                            symbol: 'none',
+                            x: '90%',
+                            yAxis: 'max'
+                        }, {
+                            symbol: 'circle',
+                            label: {
+                                position: 'start',
+                                formatter: '最大值'
+                            },
+                            type: 'max',
+                            name: '最高点'
+                        }]
+                    ]
+                }
+            }
+        ]
+    };
+    returnMChart.setOption(option3);
+
+
+
+</script>
+</html>

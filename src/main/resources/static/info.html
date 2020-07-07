@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <script src="layui/layui.js"></script>
     <script src="js/jquery-1.11.0.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/ajaxUtil.js"></script>
     <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
     <title></title>
 </head>
@@ -13,171 +15,215 @@
 
 
 
-<div class="layui-card " style="padding: 10px; background-color: #393D49; border-radius: 10px;">
 
-    <!--<div class="layui-card-body layui-bg-cyan " style="border-radius: 10px;" >-->
-
-    <div class="layui-row layui-col-space15" >
-        <div class="layui-col-md1  ">
-            <div class="grid-demo grid-demo-bg1 layui-col-lg-offset4  ">
-                <i class="layui-icon layui-icon-time" style="font-size: 30px; color: #F0F0F0;"></i>
+<div class="layui-row">
+    <div class="layui-col-md2">
+        <div class="grid-demo grid-demo-bg1">
+<!--            <ul class="layui-nav layui-nav-tree" lay-filter="test">-->
+            <div>
+<!--                <p style="float: left">超好看的网站</p>-->
+                侧边导: <ul class="layui-nav layui-nav-tree layui-nav-side">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">我是主页</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">我是分支</a></dd>
+                        <dd><a href="javascript:;">我也是分支</a></dd>
+                        <dd><a href="">我还是分支</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">地图模式</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="">移动模块</a></dd>
+                        <dd><a href="">后台模版</a></dd>
+                        <dd><a href="">电商平台</a></dd>
+                    </dl>
+                </li>
+                <!--            <li class="layui-nav-item"><a href="">产品</a></li>-->
+                <li class="layui-nav-item"><a href="">关于我们</a></li>
+            </ul>
             </div>
-        </div>
-        <div class="layui-col-md11 ">
-            <div class="grid-demo">
+           </div>
+    </div>
+    <div class="layui-col-md10" >
+        <div class="grid-demo" >
 
+            <!--上方框-->
+            <div class="layui-card " id="elem" style="padding: 10px; background-color: #393D49; border-radius: 10px;">
 
-                <div class="layui-row">
-                    <div class="layui-col-md4">
-                        <div class="grid-demo grid-demo-bg1">
+                <!--<div class="layui-card-body layui-bg-cyan " style="border-radius: 10px;" >-->
 
-
-                            <form class="layui-form" action="">
-                                <div class="layui-inline">
-                                    <div class="layui-input-inline" style="width: 40%;">
-                                        <select name="way" lay-verify="required" lay-search="">
-                                            <option value="">往返</option>
-                                            <option value="1">layer</option>
-                                            <option value="2">form</option>
-                                            <option value="3">layim</option>
-
-                                        </select>
-                                    </div>
-                                    <div class="layui-input-inline" style="width: 40%;">
-                                        <select name="kind" lay-verify="required" lay-search="">
-                                            <option value="">1成人经济舱</option>
-                                            <option value="1">layer</option>
-                                            <option value="2">form</option>
-                                            <option value="3">layim</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-
-                            </form>
-
-
+                <div class="layui-row layui-col-space15" >
+                    <div class="layui-col-md1  ">
+                        <div class="grid-demo grid-demo-bg1 layui-col-lg-offset4  ">
+                            <i class="layui-icon layui-icon-time" style="font-size: 30px; color: #F0F0F0;"></i>
                         </div>
                     </div>
-
-                    <div class="layui-col-md4">
+                    <div class="layui-col-md11 ">
                         <div class="grid-demo">
-                            <form class="layui-form" action="">
-                                <div class="layui-inline">
-                                    <div id="search" class="layui-input-inline" style="width: 40%;">
-                                        <select name="goto" lay-verify="required" lay-search="">
-                                            <option value="">出发地</option>
-                                            <option value="1">123</option>
-                                            <option value="2">form</option>
-                                            <option value="3">layim</option>
 
-                                        </select>
-                                    </div>
-                                    <button type="button" class="layui-btn layui-btn-sm">交换</button>
-                                    <div id="search" class="layui-input-inline" style="width: 40%;">
-                                        <select name="aim" lay-verify="required" lay-search="">
-                                            <option value="">目的地</option>
-                                            <option value="1">layer</option>
-                                            <option value="2">form</option>
-                                            <option value="3">layim</option>
 
-                                        </select>
+                            <div class="layui-row">
+                                <div class="layui-col-md4">
+                                    <div class="grid-demo grid-demo-bg1">
+
+
+                                        <form class="layui-form" action="">
+                                            <div class="layui-inline">
+                                                <div class="layui-input-inline" style="width: 40%;">
+                                                    <select name="way" lay-verify="required" lay-search="">
+                                                        <option value="">往返</option>
+                                                        <option value="1">layer</option>
+                                                        <option value="2">form</option>
+                                                        <option value="3">layim</option>
+
+                                                    </select>
+                                                </div>
+                                                <div class="layui-input-inline" style="width: 40%;">
+                                                    <select name="kind" lay-verify="required" lay-search="">
+                                                        <option value="">1成人经济舱</option>
+                                                        <option value="1">layer</option>
+                                                        <option value="2">form</option>
+                                                        <option value="3">layim</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                        </form>
+
+
                                     </div>
                                 </div>
 
+                                <div class="layui-col-md4">
+                                    <div class="grid-demo">
+                                        <form class="layui-form" action="">
+                                            <div class="layui-inline">
+                                                <div id="search" class="layui-input-inline" style="width: 40%;">
+                                                    <select name="goto" lay-verify="required" lay-search="">
+                                                        <option value="">出发地</option>
+                                                        <option value="1">123</option>
+                                                        <option value="2">form</option>
+                                                        <option value="3">layim</option>
+
+                                                    </select>
+                                                </div>
+                                                <button type="button" class="layui-btn layui-btn-sm">交换</button>
+                                                <div id="search" class="layui-input-inline" style="width: 40%;">
+                                                    <select name="aim" lay-verify="required" lay-search="">
+                                                        <option value="">目的地</option>
+                                                        <option value="1">layer</option>
+                                                        <option value="2">form</option>
+                                                        <option value="3">layim</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
 
 
 
 
-                            </form>
-                        </div>
 
-                    </div>
+                                        </form>
+                                    </div>
 
-
-                    <div class="layui-col-md4">
-                        <div class="grid-demo grid-demo-bg1">
-
-                            <div class="layui-inline">
-                                <div class="layui-input-inline ">
-                                    <input type="text" class="layui-input" id="test1" placeholder="yyyy-MM-dd">
                                 </div>
-                                <button type="button" class="layui-btn"><i class="layui-icon layui-icon-search" ></i>搜索</button>
+
+
+                                <div class="layui-col-md4">
+                                    <div class="grid-demo grid-demo-bg1">
+
+                                        <div class="layui-inline">
+                                            <div class="layui-input-inline ">
+                                                <input type="text" class="layui-input" id="test1" placeholder="yyyy-MM-dd">
+                                            </div>
+                                            <button type="button" class="layui-btn"><i class="layui-icon layui-icon-search" ></i>搜索</button>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
-
                         </div>
+                    </div>
+
+
+                </div>
+                <!--</div>-->
+
+            </div>
+            <!--显示卡片-->
+
+
+            <div class="card" style="padding: 20px; " id="card">
+                <div class="layui-progress">
+                    <div class="layui-progress-bar layui-bg-blue" lay-percent="50%"></div>
+                </div>
+                <div class="layui-card" v-for = "card in cards" >
+
+                    <div class="layui-card-header">
+                        当日最低价
+                       <span> {{card.firmname}}</span>
+                    </div>
+                    <!--青色分割线-->
+                    <hr class="layui-bg-cyan">
+
+                    <div class="layui-card-body layui-bg-cyan">
+                        <div class="layui-row layui-col-space10 ">
+                            <div class="layui-col-md2 ">
+
+                            </div>
+                            <div class="layui-col-md6">
+                                <div class="layui-row layui-col-space10" style="word-wrap: break-word; word-break: normal;">
+                                    <div class="layui-col-md4 " style=" text-align: left;">
+                                        <h5 style="text-align: left;">{{card.goOff}}</h5>
+                                        <h4 style="text-align: left;">{{card.departure}}</h4>
+                                    </div>
+                                    <div class="layui-col-md4">
+                                        <hr class="layui-bg-orange">
+                                        <div class="item-text layui-inline" ><h6 style="text-align: center;">{{card.transit}}</h6></div>
+
+                                    </div>
+                                    <div class="layui-col-md4" style="text-align: right;">
+
+                                        <h5 style="text-align: right;">{{card.arrTime}}</h5>
+                                        <h4 style="text-align: right;">{{card.destination}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md4 "  style="text-align: center;">
+                                <i class="layui-icon">&#xe68d;</i>  <span>{{card.speTime}}</span>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="layui-card-body layui-bg-green">
+                        <div class="layui-row ">
+                            <div class="layui-col-md9">
+                                <button type="button" class="layui-btn layui-btn-radius layui-btn-primary">航程详情</button>
+                            </div>
+                            <div class="layui-col-md3">
+                                <span>含税总价：￥{{cost}}</span>
+                                <button type="button" class="layui-bg-cyan layui-btn layui-btn-sm layui-btn-radius">选择去程</button>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
         </div>
-
-
-    </div>
-    <!--</div>-->
-</div>
-
-
-
-
-<div class="card" style="padding: 20px; background-color: #F2F2F2;">
-    <div class="layui-progress">
-        <div class="layui-progress-bar layui-bg-blue" lay-percent="50%"></div>
-    </div>
-    <div class="layui-card">
-
-        <div class="layui-card-header">
-            当日最低价
-            <span>&nbsp;四川航空 666号机</span>
-        </div>
-        <!--青色分割线-->
-        <hr class="layui-bg-cyan">
-        <div class="layui-card-body layui-bg-cyan">
-            <div class="layui-row layui-col-space10 ">
-                <div class="layui-col-md2 ">
-
-                </div>
-                <div class="layui-col-md6">
-                    <div class="layui-row layui-col-space10">
-                        <div class="layui-col-md4 ">
-                            <h4 style="text-align: center;">08:00</h4>
-                            <h3 style="text-align: center;">双流机场T1</h3>
-                        </div>
-                        <div class="layui-col-md4">
-                            <hr class="layui-bg-orange">
-                        </div>
-                        <div class="layui-col-md4">
-
-                            <h4 style="text-align: center;">14:00</h4>
-                            <h3 style="text-align: center;">大兴机场T1</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-col-md4">
-                    <i class="layui-icon">&#xe68d;</i>  <span>7h4min</span>
-
-
-                </div>
-            </div>
-
-        </div>
-        <div class="layui-card-body layui-bg-green">
-            <div class="layui-row ">
-                <div class="layui-col-md9">
-                    <button type="button" class="layui-btn layui-btn-radius layui-btn-primary">航程详情</button>
-                </div>
-                <div class="layui-col-md3">
-                    <span>含税总价：￥6666</span>&nbsp;&nbsp;&nbsp;
-                    <button type="button" class="layui-bg-cyan layui-btn layui-btn-sm layui-btn-radius">选择去程</button>
-                </div>
-            </div>
-
-
-        </div>
     </div>
 </div>
+
 
 </body>
 <style type="text/css">
+    body{
+        background-image: url("pic/cloud.png");
+    }
     .card{
         width: 60%;
         margin-left: 20%;
@@ -187,6 +233,32 @@
     }
 </style>
 <script>
+    var v1 = new Vue({
+        el:'#elem',
+        data: {
+            cards: []
+        },
+        // mounted() {
+        //     this.getInfo();
+        // },
+        methods:{
+            getInfo(){
+                ajax({
+                    method: HTTP_METHOD.GET,
+                    url: "",
+                    async: true,
+                    type: HTTP_RESPONSE_TYPE.JSON,
+                    callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
+
+                        this.items = datas;
+                    }
+                })
+            }
+        }
+
+    });
+
+
     //注意进度条依赖 element 模块，否则无法进行正常渲染和功能性操作
     layui.use('element', function(){
         var element = layui.element;
