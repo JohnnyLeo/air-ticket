@@ -29,33 +29,33 @@ public class TicketService {
     //查询最低价机票
     public List<LowPrice> queryLowestPrice(String depatureCityName,String departureDate){
         List<LowPrice> list1 = queryMapper.queryDirLowestPrice(depatureCityName, departureDate);
-        List<LowPrice> list2 = queryMapper.queryDirLowestPrice(depatureCityName, departureDate);
-        List<LowPrice> list3 = queryMapper.queryDirLowestPrice(depatureCityName, departureDate);
-        List<LowPrice> list =  new ArrayList<>();
+//        List<LowPrice> list2 = queryMapper.queryDirLowestPrice(depatureCityName, departureDate);
+//        List<LowPrice> list3 = queryMapper.queryDirLowestPrice(depatureCityName, departureDate);
+//        List<LowPrice> list =  new ArrayList<>();
+//
+//        for (int i = 0;i < list1.size();i++){
+//            LowPrice lowPrice = list1.get(i);
+//            for (int j = 0;j < list2.size();j++){
+//                if (list2.get(j).getArrivalCityName().equals(lowPrice.getArrivalCityName())){
+//                    if (list2.get(j).getPrice() < lowPrice.getPrice()){
+//                       lowPrice = list2.get(j);
+//                    }
+//                    break;
+//                }
+//            }
+//            for (int j = 0;j < list3.size();j++){
+//                if (list3.get(j).getArrivalCityName().equals(lowPrice.getArrivalCityName())){
+//                    if (list3.get(j).getPrice() < lowPrice.getPrice()){
+//                        lowPrice = list3.get(j);
+//                    }
+//                    break;
+//                }
+//            }
+//            list.add(lowPrice);
+//        }
 
-        for (int i = 0;i < list1.size();i++){
-            LowPrice lowPrice = list1.get(i);
-            for (int j = 0;j < list2.size();j++){
-                if (list2.get(j).getArrivalCityName().equals(lowPrice.getArrivalCityName())){
-                    if (list2.get(j).getPrice() < lowPrice.getPrice()){
-                       lowPrice = list2.get(j);
-                    }
-                    break;
-                }
-            }
-            for (int j = 0;j < list3.size();j++){
-                if (list3.get(j).getArrivalCityName().equals(lowPrice.getArrivalCityName())){
-                    if (list3.get(j).getPrice() < lowPrice.getPrice()){
-                        lowPrice = list3.get(j);
-                    }
-                    break;
-                }
-            }
-            list.add(lowPrice);
-        }
 
-
-        return list;
+        return list1;
     };
 
 }
