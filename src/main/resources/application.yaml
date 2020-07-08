@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:hive2://192.168.101.122:10000/default
-    username: suncaper
-    password:
-    driver-class-name: org.apache.hive.jdbc.HiveDriver
+    url: jdbc:mysql://192.168.101.122:3306/ticket?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: hive
+    password: admin
+    driver-class-name: com.mysql.jdbc.Driver

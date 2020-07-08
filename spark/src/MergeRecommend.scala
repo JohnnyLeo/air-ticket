@@ -81,7 +81,7 @@ object MergeRecommend {
     val result = dfWithOrder.withColumn("departureTime", regexp_replace(dfWithOrder("departureTime"), "\\.", ":"))
         .withColumn("tripTime", regexp_replace(dfWithOrder("tripTime"), "\\.", ":"))
 
-    result.coalesce(1).write.option("header", "true").csv("hdfs://192.168.101.122:9000/air/ticket.csv")
-
+    //result.coalesce(1).write.option("header", "true").csv("hdfs://192.168.101.122:9000/air/ticket.csv")
+  result.show(3)
   }
 }
