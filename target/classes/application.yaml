@@ -1,6 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:hive2://192.168.101.122:10000/default
-    username: suncaper
-    password:
-    driver-class-name: org.apache.hive.jdbc.HiveDriver
