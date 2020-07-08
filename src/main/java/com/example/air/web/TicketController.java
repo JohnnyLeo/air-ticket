@@ -23,8 +23,11 @@ public class TicketController {
     @RequestMapping(value = "/getTicket")
     public void getTicket(HttpServletResponse response, @RequestParam(value = "depatureCityName")String depatureCityName,
                           @RequestParam(value = "arrivalCityName")String arrivalCityName,@RequestParam(value = "departureDate")String departureDate) throws IOException{
+        System.out.println(departureDate);
+
         List<AirTicket> list = ticketService.queryDirTickets(depatureCityName,arrivalCityName,departureDate);
         String content = JSON.toJSONString(list);
+        System.out.println(content);
         response.setContentType("text/json;charset=utf-8");
         response.getWriter().write(content == null ? "" : content);
 
