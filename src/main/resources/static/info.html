@@ -100,7 +100,7 @@
                                     <div class="grid-demo">
                                         <form class="layui-form" action="">
                                             <div class="layui-inline">
-                                                <div id="search" class="layui-input-inline" style="width: 40%;">
+                                                <div id="departure" class="layui-input-inline" style="width: 40%;">
                                                     <select name="goto" lay-verify="required" lay-search="">
                                                         <option value="">出发地</option>
                                                         <option value="1">123</option>
@@ -110,7 +110,7 @@
                                                     </select>
                                                 </div>
                                                 <button type="button" class="layui-btn layui-btn-sm">交换</button>
-                                                <div id="search" class="layui-input-inline" style="width: 40%;">
+                                                <div id="arrival" class="layui-input-inline" style="width: 40%;">
                                                     <select name="aim" lay-verify="required" lay-search="">
                                                         <option value="">目的地</option>
                                                         <option value="1">layer</option>
@@ -238,9 +238,9 @@
         data: {
             cards: []
         },
-        // mounted() {
-        //     this.getInfo();
-        // },
+        mounted() {
+            this.getInfo();
+        },
         methods:{
             getInfo(){
                 ajax({
@@ -256,6 +256,36 @@
             }
         }
 
+    });
+    $.ajax({
+        type:'GET',
+        url:'/Ticket/getdeparture',
+        success:function(data){
+            for (var i = 0;i < data.length;i++) {
+                $("#departure").append("<option >"+data[i]+"</option>")
+            }
+            layui.form.render("select");
+            // let labArr = data[0].region;
+            // selectRender(labArr); // 在success 里面调用该事件
+        },
+        error:function() {
+            alert("数据加载失败！");
+        }
+    });
+    $.ajax({
+        type:'GET',
+        url:'/Ticket/getArrival',
+        success:function(data){
+            for (var i = 0;i < data.length;i++) {
+                $("#arrival").append("<option >"+data[i]+"</option>")
+            }
+            layui.form.render("select");
+            // let labArr = data[0].region;
+            // selectRender(labArr); // 在success 里面调用该事件
+        },
+        error:function() {
+            alert("数据加载失败！");
+        }
     });
 
 

@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface QueryMapper {
     //根据出发到达地和出发时间查询航班信息
-    @Select("select * from table " +
+    @Select("select * from flight " +
             "where depatureCityName = #{depatureCityName} and arrivalCityName = #{arrivalCityName} and departureDate = #{departureDate}" +
             "order by 'order'")
     List<AirTicket> queryDirTickets(String depatureCityName,String arrivalCityName,String departureDate);
@@ -23,6 +23,10 @@ public interface QueryMapper {
     //从二次中转表根据出发地和时间查询最低价
     @Select("select  arrivalCityName,price from secondLowest where depatureCityName = #{depatureCityName} and departureDate = #{departureDate}")
     List<LowPrice> querysecLowestPrice(String depatureCityName,String departureDate);
-    //查询地方集合
-    @Select("select * from ")
+    //查询出发地地方集合
+    @Select("select distinct depatureCityName from flight ")
+    List<String> getdepatureCityName();
+    //查询目的地集合
+    @Select("select distinct arrivalCityName from flight ")
+    List<String> getarrivalCityName();
 }

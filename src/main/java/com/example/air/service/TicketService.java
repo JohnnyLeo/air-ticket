@@ -1,5 +1,6 @@
 package com.example.air.service;
 
+import com.alibaba.fastjson.JSON;
 import com.example.air.domain.AirTicket;
 import com.example.air.domain.LowPrice;
 import com.example.air.mapper.QueryMapper;
@@ -14,6 +15,13 @@ import java.util.List;
 public class TicketService {
     @Resource
     QueryMapper queryMapper;
+
+    public String getdepatureCityName(){
+        return JSON.toJSONString(queryMapper.getdepatureCityName());
+    }
+    public String getarrivalCityName(){
+        return JSON.toJSONString(queryMapper.getarrivalCityName());
+    }
 
     public List<AirTicket> queryDirTickets(String depatureCityName, String arrivalCityName, String departureDate){
         return queryMapper.queryDirTickets(depatureCityName, arrivalCityName, departureDate);

@@ -39,5 +39,19 @@ public class TicketController {
 
 
     }
+    @RequestMapping(value = "/getdeparture")
+    public void getDeparture(HttpServletResponse response) throws  IOException{
+        response.setContentType("text/json;charset=utf-8");
+        String content = ticketService.getdepatureCityName();
+        System.out.println(content);
+        response.getWriter().write(content == null ? "" : content);
+    }
+    @RequestMapping(value = "/getArrival")
+    public void getArrival(HttpServletResponse response) throws  IOException{
+        response.setContentType("text/json;charset=utf-8");
+        String content = ticketService.getarrivalCityName();
+        System.out.println(content);
+        response.getWriter().write(content == null ? "" : content);
+    }
 }
 
