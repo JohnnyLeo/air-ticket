@@ -15,7 +15,9 @@ public interface QueryMapper {
             "order by 'order'")
     List<AirTicket> queryDirTickets(String depatureCityName,String arrivalCityName,String departureDate);
     //根据出发地直达和时间查询最低价
-    @Select("select  arrivalCityName,price from directLowest where depatureCityName = #{depatureCityName} and departureDate = #{departureDate}")
+//    @Select("select  arrivalCityName,price from directLowest where depatureCityName = #{depatureCityName} and departureDate = #{departureDate}")
+    @Select("select  arrivalCityName,min(price)price from filght where depatureCityName = #{depatureCityName} and departureDate = #{departureDate}" +
+            "group by arrivalCityName")
     List<LowPrice> queryDirLowestPrice(String depatureCityName, String departureDate);
     //从一次中转表根据出发地和时间查询最低价
     @Select("select  arrivalCityName,price from firstLowest where depatureCityName = #{depatureCityName} and departureDate = #{departureDate}")
