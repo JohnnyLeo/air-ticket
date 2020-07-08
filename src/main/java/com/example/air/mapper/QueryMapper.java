@@ -23,4 +23,6 @@ public interface QueryMapper {
     //从二次中转表根据出发地和时间查询最低价
     @Select("select  arrivalCityName,price from secondLowest where depatureCityName = #{depatureCityName} and departureDate = #{departureDate}")
     List<LowPrice> querysecLowestPrice(String depatureCityName,String departureDate);
+    //查询地方集合
+    @Select("select * from ")
 }

@@ -138,7 +138,7 @@
                                             <div class="layui-input-inline ">
                                                 <input type="text" class="layui-input" id="test1" placeholder="yyyy-MM-dd">
                                             </div>
-                                            <button type="button" class="layui-btn"><i class="layui-icon layui-icon-search" ></i>搜索</button>
+                                            <button type="button" class="layui-btn" v-on:click = "getInfo"><i class="layui-icon layui-icon-search" ></i>搜索</button>
                                         </div>
 
                                     </div>
@@ -245,7 +245,7 @@
             getInfo(){
                 ajax({
                     method: HTTP_METHOD.GET,
-                    url: "",
+                    url: "/Ticket/getTicket",
                     async: true,
                     type: HTTP_RESPONSE_TYPE.JSON,
                     callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
