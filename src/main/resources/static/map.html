@@ -8,7 +8,9 @@
     <script src="./js/jquery.min.js"></script>
     <script src="./js/echarts.min.js"></script>
     <script src="./js/china.js"></script>
-    <title>Document</title>
+    <script src="layui/layui.js"></script>
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+    <title>map</title>
     <link rel="stylesheet" href="./css/bootstrap.css">
     <style>
         * {
@@ -22,10 +24,59 @@
     </style>
 </head>
 
-<body>
-<div id="china-map" style="width:100%;height:800px;"></div>
+<body style="background-color: #404a59">
+
+<div class="layui-row">
+    <div class="layui-col-md2">
+        <div class="grid-demo grid-demo-bg1">
+            <!--            <ul class="layui-nav layui-nav-tree" lay-filter="test">-->
+            <div>
+                <!--                <p style="float: left">超好看的网站</p>-->
+                侧边导: <ul class="layui-nav layui-nav-tree layui-nav-side">
+                <li class="layui-nav-item">
+                    <a href="/info.html">我是主页</a>
+                </li>
+                <li class="layui-nav-item layui-this">
+                    <a href="/map.html">地图模式</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/predict.html">价格预测</a>
+                </li>
+                <!--            <li class="layui-nav-item"><a href="">产品</a></li>-->
+                <li class="layui-nav-item"><a href="">关于我们</a></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+    <div class="layui-row layui-col-space15" style="background-color: #404a59" >
+        <div class="layui-inline" style="float: right;margin-right: 200px">
+            <div class="layui-inline" style="margin-right:200px">
+                <input type="text" class="layui-input" id="start" placeholder="出发地">
+            </div>
+            <div class="layui-input-inline ">
+                <input  type="text" class="layui-input" id="test1" placeholder="yyyy-MM-dd">
+            </div>
+            <button type="button" class="layui-btn" id="search"><i class="layui-icon layui-icon-search" ></i>搜索</button>
+        </div>
+    </div>
+    <div id="china-map" style="width:100%;height:800px;"></div>
+</div>
+
+
 </body>
+
 <script>
+
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //常规用法
+        laydate.render({
+            elem: '#test1'
+        });
+
+    });
+
     var myChart = echarts.init(document.getElementById('china-map'));
     var geoCoordMap = {
         "丰台区": [116.38, 39.78],
@@ -312,9 +363,10 @@
         { name: "琼海", value:"博鳌机场"},
         { name: "香港", value:"赤腊角机场"},
         { name: "台湾", value:"台北桃园国际机场"},
-
-
     ]
+
+    var data1 = []
+
     function convertData(data) {
         var res = [];
         for (var i = 0; i < data.length; i++) {
@@ -419,10 +471,58 @@
                 },
                 zlevel: 1
             },
+            {
+                type: 'effectScatter',
+                coordinateSystem: 'geo',
+                data: convertData(data1),
+                symbolSize: 12,
+                showEffectOn: 'render',
+                rippleEffect: {
+                    brushType: 'stroke'
+                },
+                hoverAnimation: true,
+                label: {
+                    normal: {
+                        formatter: '{b}',
+                        position: 'right',
+                        show: true
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#FF6600',
+                        shadowBlur: 10,
+                        shadowColor: '#333'
+                    }
+                },
+                zlevel: 1
+            }
         ]
     }
 
     myChart.setOption(option);
+
+
+
+    var start = document.getElementById("start")
+    var date = document.getElementById("test1")
+    var search = document.getElementById("search")
+    search.onclick = function() {
+        $.ajax({
+            type:'GET',
+            url:'/Ticket/getLowestPrice?depatureCityName=' + start.value + '&departureDate=' + date.value,
+            success:function(data){
+                for (var i = 0;i < data.length;i++) {
+                    data1.push({name: data[i]["arrivalCityName"], value: data[i]["price"]})
+                }
+                option.series[2].data = convertData(data1)
+                myChart.setOption(option);
+            },
+            error:function() {
+                alert("数据加载失败！");
+            }
+        });
+    }
 
 </script>
 

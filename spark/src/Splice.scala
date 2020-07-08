@@ -38,7 +38,7 @@ object Splice {
     //df.printSchema()
 
     df.createGlobalTempView("ticket")
-    spark.sql("select * from global_temp.ticket where departureCityTlc = 'AAT'").collect()
+    //spark.sql("select * from global_temp.ticket where departureCityTlc = 'AAT'").collect()
 
 
 
@@ -51,19 +51,21 @@ object Splice {
       val departureAirportTlc = line.get(0).toString
       val arrivalAirportTlc = line.get(2).toString
       val departureDate = Timestamp.valueOf(line.get(4).toString)
-      var minPrice = spark.sql(
-        s"""select min(price) from global_temp.ticket
+      var minPrice = 9999.0
+      val list0 = spark.sql(
+        s"""select price from global_temp.ticket
           |where departureAirportTlc = '$departureAirportTlc'
           |and arrivalAirportTlc = '$arrivalAirportTlc'
-          |and departureDate = timestamp('$departureDate')""".stripMargin).collect()(0).get(0).toString.toDouble
-      print(minPrice)
+          |and departureDate = timestamp('$departureDate')""".stripMargin)
+      list0.collect().foreach(line0 => {
+        minPrice = if (line0.get(0).toString.toDouble < minPrice ) line0.get(0).toString.toDouble else  minPrice
+      })
       //getFirstFlight(departureAirportTlc, arrivalAirportTlc, minPrice)
       val list1 = spark.sql(
         s"""select flightNumber, arrivalAirportTlc, arrivalDate, price from global_temp.ticket
            |where departureAirportTlc = '$departureAirportTlc'
            |and arrivalAirportTlc != '$arrivalAirportTlc'
            |and price < '$minPrice'""".stripMargin)
-
       list1.collect().foreach(line1 => {
         //getSecondFlight(line1.get(1).toString, arrivalAirportTlc,
         //Timestamp.valueOf(line1.get(2).toString), minPrice - line1.get(3).toString.toDouble)

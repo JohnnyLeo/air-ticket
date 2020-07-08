@@ -7,13 +7,11 @@
     <script src="js/vue.js"></script>
     <script src="js/ajaxUtil.js"></script>
     <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
-    <title></title>
+    <title>info</title>
 </head>
 
 
 <body>
-
-
 
 
 <div class="layui-row">
@@ -23,21 +21,14 @@
             <div>
 <!--                <p style="float: left">超好看的网站</p>-->
                 侧边导: <ul class="layui-nav layui-nav-tree layui-nav-side">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a href="javascript:;">我是主页</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">我是分支</a></dd>
-                        <dd><a href="javascript:;">我也是分支</a></dd>
-                        <dd><a href="">我还是分支</a></dd>
-                    </dl>
+                <li class="layui-nav-item layui-this">
+                    <a href="/info.html">我是主页</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">地图模式</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="">移动模块</a></dd>
-                        <dd><a href="">后台模版</a></dd>
-                        <dd><a href="">电商平台</a></dd>
-                    </dl>
+                    <a href="/map.html">地图模式</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/predict.html">价格预测</a>
                 </li>
                 <!--            <li class="layui-nav-item"><a href="">产品</a></li>-->
                 <li class="layui-nav-item"><a href="">关于我们</a></li>
@@ -45,7 +36,7 @@
             </div>
            </div>
     </div>
-    <div class="layui-col-md10" >
+    <div class="layui-col-md10" style="overscroll-behavior: auto">
         <div id="elem" class="grid-demo" >
 
             <!--上方框-->
@@ -222,7 +213,7 @@
 </body>
 <style type="text/css">
     body{
-        background-image: url("pic/cloud.png");
+        background: url("pic/cloud.png") fixed;
     }
     .card{
         width: 60%;
@@ -290,8 +281,7 @@
                     url: "/Ticket/getTicket?depatureCityName="+depatureCityName+"&arrivalCityName="+arrivalCityName+"&departureDate="+departureDate,
                     async: true,
                     type: HTTP_RESPONSE_TYPE.JSON,
-                    callback: (datas) => { // 这里错了 你这里下面的 this 是 这个 ajax( 里面这个对象表示的 this ，JS 的this 初学者很容易犯错)
-                        alert(datas[0].airlineName);
+                    callback: (datas) => {
                         this.cards = datas;
                     }
                 })
