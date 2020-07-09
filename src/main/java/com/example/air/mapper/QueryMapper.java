@@ -12,7 +12,7 @@ public interface QueryMapper {
     //根据出发到达地和出发时间查询航班信息
     @Select("select * from fli " +
             "where depatureCityName = #{depatureCityName} and arrivalCityName = #{arrivalCityName} and departureDate = #{departureDate}" +
-            "order by 'order'")
+            "order by ord asc")
     List<AirTicket> queryDirTickets(String depatureCityName,String arrivalCityName,String departureDate);
     //根据出发地直达和时间查询最低价
 //    @Select("select  arrivalCityName,price from directLowest where depatureCityName = #{depatureCityName} and departureDate = #{departureDate}")
